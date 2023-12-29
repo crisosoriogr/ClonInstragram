@@ -1,8 +1,24 @@
 <script>
+    import {onMount} from "svelte";
     import Header from '../components/Header.svelte';
     import Main from '../components/Main.svelte';
     import TimeLine from '../components/TimeLine.svelte';
     import Sidebar from '../components/Sidebar.svelte';
+
+
+    let data={};
+    const API="https://api-pugstagram.herokuapp.com/?nickname=jmam&name=Jhon%20Manuel";
+    onMount(async () => {
+    try {
+        const response = await fetch(API);
+        const fetchedData = await response.json();
+        set(data, fetchedData);  
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+    }
+});
+
     
 
 </script>
@@ -14,7 +30,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500;700&display=swap');
     :global(body){
         background-color: #fafafa;
-        color:rgb(38, 38, 38,0.7);
+        color:rgba(38, 38, 38,0.7);
         font-family:"Lato", sans-serif; 
         margin: 0;
         padding: 0;
@@ -30,6 +46,6 @@
 <Header/>
 
 <Main>
-    <TimeLine/>
-    <Sidebar/>
+    <TimeLine post={data.posts}/>
+    <Sidebar {...data.user}/>
 </Main>

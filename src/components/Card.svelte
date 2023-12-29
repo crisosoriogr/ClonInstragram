@@ -1,6 +1,13 @@
 
 <script>
     import Comments from "./Comments.svelte";
+    export let username;
+    export let location;
+ 
+    export let postComent;
+    export let comments;
+   
+
 </script>
 
 <style>
@@ -115,10 +122,10 @@
  <div class="Card-container">
     <div class="Card-header">
         <div class="Card-user">
-            <img src="https://www.lapatria.com/sites/default/files/styles/ampliar_945/public/noticia/2022-12/UMANIZALES.jpg?itok=mGqlvLaa" alt="">
+            <img src="https://www.lapatria.com/sites/default/files/styles/ampliar_945/public/noticia/2022-12/UMANIZALES.jpg?itok=mGqlvLaa" alt={username}>
             <h2>
                 Cristian.Oso
-                <span>Manizales,Colombia</span>
+                <span>{location}</span>
             </h2>
         </div>
        <div class="Card-settings">
@@ -128,7 +135,7 @@
     </div>
       <div class="Card-photo">
          <figure>
-            <img src="https://www.lapatria.com/sites/default/files/styles/ampliar_945/public/noticia/2022-12/UMANIZALES.jpg?itok=mGqlvLaa" alt="">
+            <img src="https://www.lapatria.com/sites/default/files/styles/ampliar_945/public/noticia/2022-12/UMANIZALES.jpg?itok=mGqlvLaa" alt={username}>
          </figure>
       </div>
 
@@ -145,11 +152,11 @@
 
       <div class="Card-description">
         <h3>Cristian.Oso</h3>
-        <span>Hola !</span>
+        <span>{postComent}</span>
       </div>
       
 
-      <Comments/>
+      <Comments {comments}/>
  </div>
 
 </div>
