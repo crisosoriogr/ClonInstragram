@@ -1,5 +1,21 @@
 <script>
   export let comments= [];
+  function addComment(event) {
+    const msg = event.target.Text.value;
+    if(msg.length>3){
+      const message={
+        id:Date.now(),
+        username: "gndx",
+        text: msg,
+      };
+      }
+
+      comments=[...comments,message];
+      event.target.text.value="";
+
+
+    }
+ 
 
 </script>
 
@@ -72,7 +88,8 @@
    
 
         <div class="Comments-add">
-            <form>
+            <!-- svelte-ignore missing-declaration -->
+            <form on:submit={preventDefault(addComment)}>
 
                 <input type="text"
                 class="Comments-input"

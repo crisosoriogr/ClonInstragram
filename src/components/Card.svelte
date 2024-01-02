@@ -1,12 +1,28 @@
 
 <script>
     import Comments from "./Comments.svelte";
+    import Modal from "./Modal.svelte";
+    import Share from "./Share.svelte";
+    import {blur} from "svelte/transition";
     export let username;
     export let location;
  
     export let postComent;
     export let comments;
-   
+   let isModal=false;
+   let like=false;
+   let bookmark=false;
+
+
+    function handlelike(){
+      like=!like;
+    }
+
+
+   function handleClick(){
+    isModal=!isModal;
+
+   }
 
 </script>
 
@@ -119,6 +135,22 @@
 
 <div class="Card">
 
+  {#if isModal}
+  <div transition:blur>
+    <Modal>
+      <Share on:click={handleClick}/>
+    </Modal>
+
+  </div>
+
+  {/if}
+
+
+
+
+
+
+
  <div class="Card-container">
     <div class="Card-header">
         <div class="Card-user">
@@ -141,13 +173,26 @@
 
       <div class="Card-icons">
         <div class="Card-icons-firts">
-            <i class="fa-light fa-heart"/>
-            <i class="fas fa-paper-plane"/>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <i class="fa-light fa-heart"
+            class:active-like={like}
+            on:click={handlelike}
+            />
+           
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <i class="fas fa-paper-plane" on:click={handleClick}/>
         </div>
        <div class="Card-icons-second">
-        <i class="fas fa-bookmark"/>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <i class="fas fa-bookmark"
+         class:active-bookmark={bookmark}
+          on:click={()=>(bookmark=!bookmark)}
+        />
        </div>
-
+bookmark
       </div>
 
       <div class="Card-description">
