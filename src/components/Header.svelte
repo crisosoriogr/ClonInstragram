@@ -1,3 +1,8 @@
+<script>
+  import {likeCount} from "../store/store.js";
+</script>
+
+
 <style>
   .Header {
     background-color: white;
@@ -69,6 +74,7 @@
         <ul>
             <li>
                 <i class="fa-duotone fa-heart"/>
+                {$likeCount===0 ?"":$likeCount}  
 
             </li>
             <li>

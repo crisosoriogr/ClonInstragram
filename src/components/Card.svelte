@@ -4,6 +4,8 @@
     import Modal from "./Modal.svelte";
     import Share from "./Share.svelte";
     import {blur} from "svelte/transition";
+
+    import {likeCount} from "../store/store.js";
     export let username;
     export let location;
  
@@ -16,9 +18,15 @@
 
     function handlelike(){
       like=!like;
+
+      if(like){
+        likeCount.update(n=>n+1);
+        
+    }else {
+      likeCount.update(n=>n-1);
     }
 
-
+  }
    function handleClick(){
     isModal=!isModal;
 
@@ -166,7 +174,7 @@
 
     </div>
       <div class="Card-photo">
-         <figure>
+         <figure on:dblclick={handleClick}>
             <img src="https://www.lapatria.com/sites/default/files/styles/ampliar_945/public/noticia/2022-12/UMANIZALES.jpg?itok=mGqlvLaa" alt={username}>
          </figure>
       </div>
